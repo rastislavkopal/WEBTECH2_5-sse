@@ -1,9 +1,3 @@
-<?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-?>
 <!doctype  html>
 <html lang="sk">
 <head>
@@ -22,8 +16,7 @@ error_reporting(E_ALL);
 <?php include('./views/prepare.php') ?>
 <hr>
 
-<section id="section_main">
-</section>
+<section id="section_main"></section>
 
 <?php include('./views/footer.php'); ?>
 
