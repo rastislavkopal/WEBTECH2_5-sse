@@ -7,7 +7,7 @@ class ParamsModel
     private $db;
 
     /**
-     * RecordsModel constructor.
+     * ParamsModel constructor.
      */
     public function __construct()
     {
