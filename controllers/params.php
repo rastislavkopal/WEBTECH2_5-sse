@@ -1,34 +1,18 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 include_once "../models/ParamsModel.php";
 
-$toUpdate = [];
-
-if (isset($_POST['a']) && !empty($_POST['a'])){
-    $toUpdate["a"] = (isset($_POST['a']) ? $_POST['a'] : null );
+if (!isset($_POST['a']) || !isset($_POST['y1_check']) || !isset($_POST['y2_check']) || !isset($_POST['y3_check']) || empty($_POST['a']) || !is_numeric($_POST['a']) ){
+    echo "not good req.... :(";
+    return;
 }
 
-if (isset($_POST['y1_check']) && !empty($_POST['y1_check'])){
-    $toUpdate["y1"] =  (isset($_POST['y1_check']) ? $_POST['y1_check'] : null );
-}
-
-if (isset($_POST['y2_check']) && !empty($_POST['y2_check'])){
-    $toUpdate["y2"] = (isset($_POST['y2_check']) ? $_POST['y2_check'] : null );
-}
-
-if (isset($_POST['y3_check']) && !empty($_POST['y3_check'])){
-    $toUpdate["y3"] = (isset($_POST['y3_check']) ? $_POST['y3_check'] : null );
-}
-
-if (isset($_POST['client_id']) && !empty($_POST['client_id'])){
-    $toUpdate["user_id"] = (isset($_POST['client_id']) ? $_POST['client_id'] : null );
-}
+$toUpdate["a"]  = intval($_POST['a']);
+$toUpdate["y1"] = (!empty($_POST['y1_check']) && is_numeric($_POST['y1_check'])) ? intval($_POST['y1_check']) : null;
+$toUpdate["y2"] = (!empty($_POST['y2_check']) && is_numeric($_POST['y2_check'])) ? intval($_POST['y2_check']) : null;
+$toUpdate["y3"] = (!empty($_POST['y3_check']) && is_numeric($_POST['y3_check'])) ? intval($_POST['y3_check'] ) : null;
 
 
 $model = new ParamsModel();
 
-echo $model->createRecord($toUpdate) . "<br>" . var_dump($toUpdate);
+echo ($ret = $model->updateParams($toUpdate) == 1) ? "Zmena vykonaná" : $ret;
 

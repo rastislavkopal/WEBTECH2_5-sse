@@ -1,24 +1,4 @@
 var source;
-$(document).ready( function () {
-
-    // $.ajax({
-    //     url: "https://wt78.fei.stuba.sk/zadanie5/controllers/reset.php",
-    //     type: "get",
-    //     async: false,
-    //     // success: displayMessage
-    // });
-
-
-    source = new EventSource("./controllers/generator.php");
-    source.onmessage = function(event) {
-        document.getElementById("section_main").innerHTML += event.data + "<br>";
-    };
-} );
-
-function reset()
-{
-    $.get("https://wt78.fei.stuba.sk/zadanie5/controllers/reset.php", displayMessage );
-}
 
 function displayMessage(response)
 {
@@ -37,14 +17,11 @@ function prepareParams()
     let data = $('#prepare-div').serializeArray();
 
     var serializedObj = {};
-    serializedObj["a"] = data[data.length-2]["value"];
-    serializedObj["client_id"] = data[data.length-1]["value"];
-    // client_id
+    serializedObj["a"] = data[data.length-1]["value"];
 
     $("#prepare-div input:checkbox").each(function(){
         serializedObj[this.name] = this.checked ? 1 : 0;
     });
-    console.log(serializedObj);
 
     $.ajax({
         url: 'https://wt78.fei.stuba.sk/zadanie5/controllers/params.php',
@@ -53,11 +30,18 @@ function prepareParams()
         dataType: 'text',
         success: function(data){
             displayMessage(data)
+            if (isRunning == 0) {
+                isRunning++;
+                startSource();
+            }
         },
     });
 }
 
 function startSource()
 {
-
+    source = new EventSource("./controllers/generator.php");
+    source.onmessage = function(event) {
+        document.getElementById("section_main").innerHTML += event.data + "<br>";
+    };
 }

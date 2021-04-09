@@ -7,12 +7,4 @@
         </li>
     </ul>
 
-    <ul class="nav navbar-nav navbar-right">
-        <li>
-            <div id="navbar_upload" class="btn-nav" onclick="reset()">
-                <a class="btn btn-primary btn-small navbar-btn mx-3 py-2">RESET</a>
-            </div>
-        </li>
-    </ul>
-
 </nav>

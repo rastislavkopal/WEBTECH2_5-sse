@@ -16,10 +16,5 @@
         <label for="a_param" class="sr-only">Parameter</label>
         <input type="number" class="form-control" id="a_param" name="a_param" placeholder="hodnota parametra" value="1">
     </div>
-    <hr>
-    <div class="mb-2 col-2">
-        <label for="client_id" class="sr-only">ID klienta</label>
-        <input type="text" class="form-control" id="client_id" name="client_id" placeholder="ID" value="xkopalr1">
-    </div>
     <button type="button" id="prepareButton" onclick="prepareParams()" class="btn btn-primary mb-2 mx-3 my-3">Spusti</button>
 </form>
